@@ -1,0 +1,39 @@
+﻿@model CoCo.Models.NewsModel
+
+<section class="container-fluid">
+    <div class="row align-items-center justify-content-center py-5">
+        <div class="col-sm-12 col-md-7 col-lg-5 bg-light px-5 py-4 rounded">
+            <div class="text-center mb-4">
+                <h2>News</h2>
+            </div>
+            <form asp-controller="Home" asp-action="AddNews" method="post">
+                <div class="form-group mb-5 row">
+                    <label asp-for="NewsTitle" class="col-md-3 col-form-label"></label>
+                    <div class="col-md-9">
+                        <input asp-for="NewsTitle" class="form-control" />
+                        <span asp-validation-for="NewsTitle" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group mb-5 row">
+                    <label asp-for="Description" class="col-md-3 col-form-label"></label>
+                    <div class="col-md-9">
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group mb-5 row">
+                    <label asp-for="NewsBody" class="col-md-3 col-form-label"></label>
+                    <div class="col-md-9">
+                        <textarea asp-for="NewsBody" class="form-control"></textarea>
+                        <span asp-validation-for="NewsBody" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-6 text-center">
+                        <button type="submit" class="btn btn-primary w-100">Confirm</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

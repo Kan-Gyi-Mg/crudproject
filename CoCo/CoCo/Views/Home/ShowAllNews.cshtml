@@ -1,0 +1,58 @@
+﻿@model IEnumerable<CoCo.Models.NewsModel>;
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ApplicationUser user = await UserManager.GetUserAsync(User);
+}
+<style>
+    .full-height {
+        min-height: 90vh;
+    }
+</style>
+<div class="position-absolute">
+    <a href="@Url.Action("AddNews","Home")" class="btn btn-secondary btn-lg">+</a>
+</div>
+<section>     
+    <div class="container mr-5" id="dynamicSection">
+        <div class="row my-2">
+            @foreach (var news in Model)
+            {
+                <a href="@Url.Action("SingleNews","Home",new{newsid = news.NewsId})"></a>
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 bg-light d-none d-sm-block mb-2">
+                    <img src="~/image/logo.png" style="width: 200px;height:200px" />
+                </div>
+                <div class="col-xl-10 col-lg-9 col-md-8 col-sm-6 bg-light overflow-hidden position-relative mb-2">
+                    <a href="@Url.Action("SingleNews","Home",new{newsid = news.NewsId})" class="text-black text-decoration-none">
+                        <h3 class="py-2 text-primary">@news.NewsTitle</h3>
+                        <h4>@news.Description</h4>
+                        <p>@news.NewsBody</p>
+                        @if (user != null && user.Id == news.UserId)
+                        {
+                            <div class="position-absolute bottom-0 end-0">
+                                <div class="d-flex p-2 me-2">
+                                    <a href="@Url.Action("EditNews","Home",new{newsid = news.NewsId})" class="btn btn-sm btn-warning me-2">Edit</a>
+                                    <form asp-controller="News" asp-action="DeleteNews" method="post">
+                                        <input type="hidden" name="newsid" value="@news.NewsId" />
+                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<script>
+    function adjustSectionHeight() {
+        const section = document.getElementById('dynamicSection');
+        if (window.innerHeight < 800) {
+            section.classList.add('full-height');
+        } else {
+            section.classList.remove('full-height');
+        }
+    }
+    adjustSectionHeight();
+    window.addEventListener('resize', adjustSectionHeight);
+</script>

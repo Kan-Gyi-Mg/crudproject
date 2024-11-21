@@ -1,0 +1,230 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@{
+    var user = User.Identity.IsAuthenticated ? await UserManager.GetUserAsync(User) : null;
+    var userid = user?.Id;
+}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<!--First Section-->
+<section class="p-5 p-lg-0 text-center text-sm-start">
+    <div class="container">
+        <div class="d-sm-flex align-items-center justify-content-center">
+            <div>
+                <h1 class="section1-header-text">Breaking News</h1>
+                <h3 class="text-dark mt-4">Major Event Happening Now</h3>
+                <p class="fs-4 my-4 text-dark">
+                    Stay updated with the latest breaking news, insightful analyses, and expert opinions
+                </p>
+                <a href="@Url.Action("UserCreate","User")" class="btn btn-primary btn-lg">Get Started Now</a>
+            </div>
+            <img class="img-fluid w-50 d-none d-sm-block" src="~/image/robot.jpg" alt="" />
+        </div>
+    </div>
+</section>
+<!--the job of our product-->
+<section class="px-5">
+    <div class="container px-5">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-12 col-sm-6">
+                <img class="img-fluid w-100" src="~/image/707abce9-1dfc-4bc6-8ee4-de6f257843e5.png" alt="maketrising" />
+            </div>
+            <div class="col-12 col-sm-6">
+                <h1 class="section1-header-text">World News</h1>
+                <p class="fs-4 my-4 text-dark">
+                    Get the latest updates on international events and global affairs.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!--the pdf advertise section-->
+<section class="px-5">
+    <div class="container px-5">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-12 col-sm-6">
+                <h1 class="section1-header-text">Sports</h1>
+                <p class="fs-4 my-4 text-dark">
+                    Catch up on scores, highlights, and in-depth analysis of your favorite games.
+                </p>
+            </div>
+            <div class="col-12 col-sm-6">
+                <img class="img-fluid w-100" src="~/image/football.jpg" alt="pdfeditor" />
+            </div>
+        </div>
+    </div>
+</section>
+<!--premium box section-->
+<section class="px-5 pb-5">
+    <div class="container">
+        <div class="text-center mb-3">
+            <h1 class="fw-bold text-warning">Premium Plan</h1>
+        </div>
+        <div class="row d-flex">
+            <div class="col-md d-flex mb-2 mb-md-0">
+                <div class="card bg-dark text-light d-flex flex-column flex-fill">
+                    <div class="card-body">
+                        <h1 class="mb-2 text-center">Free</h1>
+                        <p class="lead mb-2">For individuals just getting started with finance tracker</p>
+                        <ul class="list-unstyled mb-2">
+                            <li class="mb-2"><i class="bi bi-check-lg"></i>Assistance with managing cash</li>
+                            <li class="mb-2"><i class="bi bi-check-lg"></i>Access to news</li>
+                            <li class="mb-2"><i class="bi bi-check-lg"></i>Limited access to Finance wallet</li>
+                            <li class="mb-2"><i class="bi bi-check-lg"></i>Limited access to data analysis</li>
+                        </ul>
+                        <h3>$0 /month</h3>
+                    </div>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="card-footer my-auto text-center">
+                            <a href="@Url.Action("ShowAllNews","Home")" class="btn btn-warning btn-lg w-50">Start now</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="card-footer my-auto text-center">
+                            <a href="@Url.Action("UserLogin","User")" class="btn btn-warning btn-lg w-50">Start now</a>
+                        </div>
+                    }
+                   
+                </div>
+            </div>
+            <div class="col-md d-flex mb-2 mb-md-0">
+                <div class="card bg-dark text-light d-flex flex-column flex-fill">
+                    <div class="card-body">
+                        <h1 class="mb-2 text-center">Plus</h1>
+                        <p class="lead mb-2">For individuals to amplify with news</p>
+                        <ul class="list-unstyled mb-2">
+                            <li class="mb-2"><i class="bi bi-check-lg"></i>Early access to new features</li>
+                            <li class="mb-2"><i class="bi bi-check-lg"></i>Access to news</li>
+                            <li class="mb-2"><i class="bi bi-check-lg"></i>No limit access to Finance wallet</li>
+                            <li class="mb-2"><i class="bi bi-check-lg"></i>Limited access to data analysis</li>
+                        </ul>
+                        <h3>$20 /month</h3>
+                    </div>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="card-footer my-auto text-center">
+                            <a href="@Url.Action("ShowAllNews","Home")" class="btn btn-warning btn-lg w-50">Start now</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="card-footer my-auto text-center">
+                            <a href="@Url.Action("UserLogin","User")" class="btn btn-warning btn-lg w-50">Start now</a>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-md d-flex mb-2 mb-md-0">
+                <div class="card bg-dark text-light d-flex flex-column flex-fill">
+                    <div class="card-body">
+                        <h1 class="mb-2 text-center">Premium</h1>
+                        <p class="lead mb-2">For global companies to super manage new</p>
+                        <ul class="list-unstyled mb-2">
+                            <li class="mb-2"><i class="bi bi-check-lg"></i>Hotline Service</li>
+                            <li class="mb-2"><i class="bi bi-check-lg"></i>Everything included in Plus</li>
+                            <li class="mb-2"><i class="bi bi-check-lg"></i>Create and Save as pdf file and image</li>
+                            <li class="mb-2"><i class="bi bi-check-lg"></i>Admin console for team member</li>
+                            <li class="mb-2"><i class="bi bi-check-lg"></i>No limited access to data analysis</li>
+                        </ul>
+                        <h3>$30 /month</h3>
+                    </div>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="card-footer my-auto text-center">
+                            <a href="@Url.Action("ShowAllNews","Home")" class="btn btn-warning btn-lg w-50">Start now</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="card-footer my-auto text-center">
+                            <a href="@Url.Action("UserLogin","User")" class="btn btn-warning btn-lg w-50">Start now</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--the trust by people section-->
+<section class="px-5">
+    <div class="container px-5">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-12 col-sm-6">
+                <h1 class="section1-header-text">Roadmap</h1>
+                <p class="fs-4 my-4 text-dark">
+                    Increase credibility by showcasing logos of trusted partners,
+                    security certifications, and endorsements from reputable organizations.
+                </p>
+                <p>Trusted by over <span class="fw-4 fs-4 text-success">1M+</span> satisfied users</p>
+            </div>
+            <div class="col-12 col-sm-6">
+                <img class="img-fluid w-100" src="~/image/45c45ca8-6cc4-4d1c-8f3b-d4354cdf0700.png" alt="pdfeditor" />
+            </div>
+        </div>
+    </div>
+</section>
+<!--Customer Review-->
+<section class="px-5">
+    <div class="container">
+        <div class="text-center mb-3">
+            <h1>Hear from Our Happy Customers</h1>
+        </div>
+        <div class="row d-flex">
+            <div class="col-md d-flex mb-2 mb-md-0">
+                <div class="card bg-dark text-light d-flex flex-column flex-fill">
+                    <div class="card-body">
+                        <div class="text-center mb-2">
+                            <img class="rounded-circle" height="100" width="100" src="~/image/UserReview.webp" alt="profilephoto" />
+                            <h3>Mr.John Smith</h3>
+                            <h5>Software Engineer</h5>
+                        </div>
+                        <div>
+                            <p class="fs-4 text-ligt px-2">
+                                <span class="fs-1 text-success">&quot;</span>
+                                This finance tracker has revolutionized the way I manage new.
+                                It's user-friendly, comprehensive, and has helped me save more than ever before.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md d-flex mb-2 mb-md-0">
+                <div class="card bg-dark text-light d-flex flex-column flex-fill">
+                    <div class="card-body">
+                        <div class="text-center mb-2">
+                            <img class="rounded-circle" height="100" width="100" src="~/image/UserReview.webp" alt="profilephoto" />
+                            <h3>Emily Johnson</h3>
+                            <h5>Software Engineer</h5>
+                        </div>
+                        <div>
+                            <p class="fs-4 text-ligt px-2">
+                                <span class="fs-1 text-success">&quot;</span>
+                                I've tried several new apps,
+                                but this one stands out for its detailed analytics and seamless interface.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md d-flex mb-2 mb-md-0">
+                <div class="card bg-dark text-light d-flex flex-column flex-fill">
+                    <div class="card-body">
+                        <div class="text-center mb-2">
+                            <img class="rounded-circle" height="100" width="100" src="~/image/UserReview.webp" alt="profilephoto" />
+                            <h3>Michael Lee</h3>
+                            <h5>Software Engineer</h5>
+                        </div>
+                        <div>
+                            <p class="fs-4 text-ligt px-2">
+                                <span class="fs-1 text-success">&quot;</span>
+                                An exceptional tool for both personal and professional new management.
+                                The investment tracking features are particularly impressive.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

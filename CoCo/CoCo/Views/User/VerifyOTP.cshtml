@@ -1,0 +1,43 @@
+﻿@model CoCo.ViewModel.UserViewModel.OTPViewModel
+@using Microsoft.AspNetCore.Http
+@{
+    var sessionValue = ViewContext.HttpContext.Session.GetString("RegisterUserId");
+    Layout = null;
+
+}
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<section class="container-fluid" style="background-color: #7F9AC0">
+    <div class="row vh-100 align-items-center justify-content-center">
+        <div class="col-sm-8 col-md-6 col-lg-4 bg-light px-5 py-4 rounded">
+            <div class="row justify-content-center">
+                <img src="~/image/logo.png" alt="finance logo" class="w-25" />
+            </div>
+            <div class="text-center mb-4">
+                <h2>Email Verification</h2>
+            </div>
+            <form asp-controller="User" asp-action="VerifyOTP" method="post">
+                <div class="form-group mb-4">
+                    <label asp-for="OTP" class="mb-2"></label>
+                    <input asp-for="OTP" class="form-control" />
+                    <span asp-validation-for="OTP" class="text-danger"></span>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary w-50">Confirm</button>
+                </div>
+            </form>
+            <div class="text-end mt-3">
+                <a class="text-decoration-none" id="resendOTPButton"><small>Resend OTP</small></a>
+                <form id="resendOTPForm" asp-action="ResendOTP" method="post" style="display: none;">
+                    <input type="hidden" id="userId" name="userId" value="@sessionValue" />
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.getElementById('resendOTPButton').addEventListener('click', function () {
+        document.getElementById('resendOTPForm').submit();
+    });
+</script>

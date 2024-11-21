@@ -1,0 +1,167 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    var user = await UserManager.GetUserAsync(User);
+    var isAdmin = User.IsInRole("Admin");
+    var userid = user?.Id;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Tracker</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        .navbar-toggler {
+            display: block !important;
+        }
+    </style>
+</head>
+<body>
+    <!--nav bar of the page-->
+    <header class="mb-3">
+        <nav class="navbar navbar-expand-lg bg-primary">
+            <div class="container">
+                <a class="navbar-brand text-white" href="#">CoCo</a>
+                <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#navmenu">
+                    menu
+                </button>
+                <div class="collapse navbar-collapse" id="navmenu">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index","Home")" class="nav-link text-white">Home</a>
+                        </li>
+                        @if (isAdmin)
+                        {
+                            <li class="nav-item ms-lg-5">
+                                <a href="@Url.Action("UserDashboard","Admin")" class="nav-link text-white">AdminDashboard</a>
+                            </li>
+                        }
+    
+                        <li class="nav-item ms-lg-5">
+                            <a href="@Url.Action("ShowAllNews","Home")" class="nav-link text-white">News</a>
+                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item ms-lg-5">
+                                <form asp-controller="User" asp-action="UserLogout" method="post">
+                                    <button type="submit" class="nav-link btn btn-danger text-white">Log Out</button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item ms-lg-5">
+                                <a href="@Url.Action("UserLogin","User")" class="nav-link text-white">Sign In</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section class="pb-3 position-relative">
+        @RenderBody()
+    </section>
+    <!--footer of the page-->
+    <footer class="p-3 bg-primary">
+        <div class="container">
+            <div class="row d-flex">
+                <div class="col-md-3 col-6 d-flex mb-2 mb-md-0">
+                    <a class="navbar-brand text-white mt-4" href="#">CoCo</a>
+                </div>
+                <div class="col-md-3 col-6 d-flex mb-2 mb-md-0">
+                    <ul class="text-white">
+                        <li class="list-unstyled">
+                            <h5>Product</h5>
+                        </li>
+                        <li class="list-unstyled">
+                            <a href="#" class="text-decoration-none text-white">
+                                Mint
+                            </a>
+                        </li>
+                        <li class="list-unstyled">
+                            <a href="#" class="text-decoration-none text-white">
+                                Personal Capital
+                            </a>
+                        </li>
+                        <li class="list-unstyled">
+                            <a href="#" class="text-decoration-none text-white">
+                                PocketGuard
+                            </a>
+                        </li>
+                        <li class="list-unstyled">
+                            <a href="#" class="text-decoration-none text-white">
+                                Moneydance
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-6 d-flex mb-2 mb-md-0">
+                    <ul class="text-white">
+                        <li class="list-unstyled">
+                            <h5>Resource</h5>
+                        </li>
+                        <li class="list-unstyled">
+                            <a href="#" class="text-decoration-none text-white">
+                                Investopedia
+                            </a>
+                        </li>
+                        <li class="list-unstyled">
+                            <a href="#" class="text-decoration-none text-white">
+                                The Balance
+                            </a>
+                        </li>
+                        <li class="list-unstyled">
+                            <a href="#" class="text-decoration-none text-white">
+                                NerdWallet
+                            </a>
+                        </li>
+                        <li class="list-unstyled">
+                            <a href="#" class="text-decoration-none text-white">
+                                Khan Academy
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-6 d-flex mb-2 mb-md-0">
+                    <ul class="text-white">
+                        <li class="list-unstyled">
+                            <h5>Social</h5>
+                        </li>
+                        <li class="list-unstyled">
+                            <a href="#" class="text-decoration-none text-white">
+                                <i class="bi bi-facebook"></i>&#160;Facebook
+                            </a>
+                        </li>
+                        <li class="list-unstyled">
+                            <a href="#" class="text-decoration-none text-white">
+                                <i class="bi bi-twitter"></i>&#160;Twitter
+                            </a>
+                        </li>
+                        <li class="list-unstyled">
+                            <a href="#" class="text-decoration-none text-white">
+                                <i class="bi bi-linkedin"></i>&#160;LinkedIn
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container text-center text-white">
+            <p class="lead fs-5">Copyright &copy; 2024 CoCo.io</p>
+            <a class="position-absolute bottom-0 end-0 p-5">
+                <i class="bi bi-arrow-up-circle h1"></i>
+            </a>
+        </div>
+    </footer>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    
+
+</body>
+</html>
+

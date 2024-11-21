@@ -1,0 +1,74 @@
+﻿@model CoCo.ViewModel.NewsViewModel.NewsViewModel
+
+<style>
+    .full-height {
+        min-height: 90vh;
+    }
+</style>
+<section class="px-5" id="dynamicSection">
+    <div class="container-fluid">
+        <div class="container px-5 bg-white bg-opacity-10">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                    <img class="img-fluid" style="width:200px;height:200px" src="~/image/logo.png" alt="maketrising" />
+                </div>
+                <div class="col-xl-10 col-lg-9 col-md-8 col-sm-6">
+                    <h3 class="py-2 text-primary">@Model.news.NewsTitle</h3>
+                    <h4>@Model.news.Description</h4>
+                </div>
+            </div>
+            <p class="fs-3">@Model.news.NewsBody</p>
+            
+        </div>
+        <hr />
+        <div class="container">
+            <div>
+                <p class="fs-2">Comments</p>
+                <div class="d-flex">
+                    <a class="btn btn-light me-3 active">Top</a>
+                    <a class="btn btn-light">Newest</a>
+                </div>
+                <div class="mt-3">
+                    <form asp-controller="Home" asp-action="AddComment" method="post">
+                        <div class="d-flex align-items-center">
+                            <input type="hidden" asp-for="news.NewsId" value="@Model.news.NewsId" />
+                            <div class="form-group mb-0 me-5 flex-grow-1">
+                                <input type="text" class="form-control" asp-for="cbody" required />
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-5">Send</button>
+                        </div>
+                    </form>
+                </div>
+                @if (Model.Comments != null)
+                {
+                    @foreach (var comment in Model.Comments)
+                    {
+                        <div class="d-flex justify-content-start">
+                            <div>
+                                <img src="~/image/profile.png" class="img-fluid" style="width:50px;height:50px" />
+                            </div>
+                            <div>
+                                <h5>@comment.username</h5>
+                                <p>@comment.CommentBody</p>
+                            </div>
+                        </div>
+                        
+                    }
+                }
+
+            </div>
+        </div>       
+    </div> 
+</section>
+<script>
+    function adjustSectionHeight() {
+        const section = document.getElementById('dynamicSection');
+        if (window.innerHeight < 800) {
+            section.classList.add('full-height');
+        } else {
+            section.classList.remove('full-height');
+        }
+    }
+    adjustSectionHeight();
+    window.addEventListener('resize', adjustSectionHeight);
+</script>
