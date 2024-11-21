@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="BusinessLayer\**" />
+    <Compile Remove="DataLayer\**" />
+    <Content Remove="BusinessLayer\**" />
+    <Content Remove="DataLayer\**" />
+    <EmbeddedResource Remove="BusinessLayer\**" />
+    <EmbeddedResource Remove="DataLayer\**" />
+    <None Remove="BusinessLayer\**" />
+    <None Remove="DataLayer\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.10">
@@ -20,11 +31,6 @@
     <PackageReference Include="MySql.Data" Version="9.1.0" />
     <PackageReference Include="NETCore.MailKit" Version="2.1.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="BusinessLayer\" />
-    <Folder Include="DataLayer\" />
   </ItemGroup>
 
 </Project>
